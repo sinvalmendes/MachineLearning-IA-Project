@@ -1,0 +1,38 @@
+from instagram.client import InstagramAPI
+from SimpleCV import Image
+import time
+import ethnicity-machine-learning
+
+api = InstagramAPI(client_id='b8bdb129b9984e8cad04af04343257ca',
+                   client_secret='e311b1d04143418d86b152db848205d7')
+tag = "face" #"face"
+
+resultTuple = api.tag_recent_media(0, 10, tag)
+locationMedias = api.media_search(100,100,-7.131724,-34.82254,1,5000000000000)
+
+medias = resultTuple[0]
+addr = resultTuple[1]
+count = 1
+for media in medias:
+	imageUrl = media.images['standard_resolution'].url
+	image = Image(imageUrl)
+	image.show()
+	time.sleep(1)
+	if hasattr(media, 'location'):
+		imageUrl = media.images['standard_resolution'].url
+		image = Image(imageUrl)
+		image = (image)
+		haarCascades = ["face","face2","face3"]
+		for haarCascade in haarCascades:
+			img = image.flipHorizontal()
+			features = img.findHaarFeatures(haarCascade)
+			if features:
+				for feature in features:
+					cropFeature = feature.crop()
+					img = Image(cropFeature)
+					className = classifyEthnicity(img)
+					img.show()
+					cropFeature.show()
+					cropFeature.save('%d.jpg'%count)
+
+					count += 1

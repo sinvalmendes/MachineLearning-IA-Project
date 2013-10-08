@@ -1,0 +1,15 @@
+#um pouco chato de pegar, mas o problema era o seguinte:
+#eu estava colocando o código de auth que fiz usando o seguinte padrão:
+"https://api.instagram.com/oauth/authorize/?client_id=12345&redirect_uri=http://codular.com&response_type=code"
+#no campo errado, o correto era no 'code=CODE' :)
+
+
+REQUEST:
+curl \-F 'client_id=b8bdb129b9984e8cad04af04343257ca' \
+    -F 'client_secret=e311b1d04143418d86b152db848205d7' \
+    -F 'grant_type=authorization_code' \
+    -F 'redirect_uri=http://www.ellosconnecti.com' \
+    -F 'code=f26df1190f5c47ee96a79b50e56a243e' \https://api.instagram.com/oauth/access_token
+
+RESPONSE:
+{"access_token":"439167687.b8bdb12.8107dfdfaab4451da8834ebe21240678","user":{"username":"sinvalvieira","bio":"","website":"","profile_picture":"http:\/\/images.ak.instagram.com\/profiles\/anonymousUser.jpg","full_name":"Sinval Vieira","id":"439167687"}}
