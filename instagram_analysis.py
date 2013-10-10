@@ -2,6 +2,7 @@ from instagram.client import InstagramAPI
 from SimpleCV import Image
 import time
 from ethnicity import *
+import json as json
 
 def getInstagramMediaUrl(media):
         return media.images['standard_resolution'].url
@@ -52,7 +53,7 @@ for media in medias:
 					cropFeature.show()
 					mediaNode = {}
 					mediaValues = setMediaValues(media, className)
-					mediasJson.setdefault("%d.jpg"%count,mediaValues)
+					mediasJson.setdefault("%d"%count,mediaValues)
 					cropFeature.save('%d.jpg'%count)
 					count += 1
 with open('data.txt', 'w') as outfile:

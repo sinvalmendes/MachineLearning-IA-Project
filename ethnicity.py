@@ -13,13 +13,13 @@ trainPaths = ['./branca', './negra']
 #testPaths = ['./tests/']
 classes = ['W', 'B']
 
-#print svm.train(trainPaths, classes, verbose=True)
+print svm.train(trainPaths, classes, verbose=True)
 #print tree.train(trainPaths, classes, verbose=True)
-#print naive.train(trainPaths, classes, verbose=False)
+print naive.train(trainPaths, classes, verbose=False)
 print knn.train(trainPaths, classes, verbose=False)
 
 def classifyEthnicity(img):
-        className = knn.classify(img)
+        className = naive.classify(img)
         return className
 
 #count = 1
